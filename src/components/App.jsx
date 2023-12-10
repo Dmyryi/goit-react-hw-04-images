@@ -25,7 +25,6 @@ function App() {
       setTotalHits(response.data.totalHits);
       setLoadMore(currentPage < Math.ceil(totalHits / 12));
     });
-    setShowLoader(false);
     // eslint-disable-next-line
   }, [searchWords, currentPage]);
 
