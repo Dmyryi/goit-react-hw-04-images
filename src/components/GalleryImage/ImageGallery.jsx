@@ -1,12 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styles from './ImageGallery.module.css';
 import GalleryImageItem from './GalleryImageItem';
 
 function ImageGallery(props) {
-  useEffect(() => {
-    props.loader(true);
-  }, [props]);
-
   return (
     <ul className={styles.ImageGallery}>
       {props.imagesArray.map((image, idx) => {

@@ -19,12 +19,19 @@ function App() {
 
   useEffect(() => {
     setShowLoader(true);
-    fetchImages(searchWords, currentPage).then(response => {
-      pushImagesToState(response);
-      setShowLoader(false);
-      setTotalHits(response.data.totalHits);
-      setLoadMore(currentPage < Math.ceil(totalHits / 12));
-    });
+
+    fetchImages(searchWords, currentPage)
+      .then(response => {
+        pushImagesToState(response);
+        setTotalHits(response.data.totalHits);
+        setLoadMore(currentPage < Math.ceil(totalHits / 12));
+      })
+      .catch(error => {
+        console.error('Error fetching images:', error);
+      })
+      .finally(() => {
+        setShowLoader(false);
+      });
     // eslint-disable-next-line
   }, [searchWords, currentPage]);
 
@@ -63,8 +70,8 @@ function App() {
   };
 
   const loadMoreFn = () => {
-    loaderToggle(true);
     setCurrentPage(prevCurrentPage => prevCurrentPage + 1);
+    loaderToggle(true);
   };
 
   return (
